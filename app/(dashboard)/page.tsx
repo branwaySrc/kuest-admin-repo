@@ -1,4 +1,4 @@
-import { stationLineUniqueCodeBook } from '@/constants/stationLineUniqueCodeBook';
+import { stationLineUniqueCodeBook } from '@/constants/station-line-unique-codebook';
 import { Database } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
