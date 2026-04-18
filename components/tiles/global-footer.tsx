@@ -117,7 +117,7 @@ export default function GlobalFooter() {
     : "text-muted-foreground bg-muted/30";
 
   return (
-    <footer className="fixed bottom-0 left-[64px] right-0 z-40 flex h-[32px] items-center border-t border-border bg-card px-4 text-[10px] font-mono text-muted-foreground select-none overflow-hidden">
+    <footer className="fixed bottom-0 left-[240px] right-0 z-40 flex h-[32px] items-center border-t border-border bg-card px-4 text-[10px] font-mono text-muted-foreground select-none overflow-hidden">
       {/* LEFT: Connection Clusters */}
       <div className="flex items-center gap-3 shrink-0">
         {/* Admin DB */}

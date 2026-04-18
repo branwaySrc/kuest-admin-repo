@@ -11,6 +11,7 @@ export default function GlobalHeader() {
     if (path === "/") return "Dashboard Overview";
     if (path.startsWith("/database")) return "Database Management";
     if (path.startsWith("/logs")) return "System Logs";
+    if (path.startsWith("/api-docs")) return "API Documentation";
     return path.split("/").filter(Boolean).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(" / ");
   };
 

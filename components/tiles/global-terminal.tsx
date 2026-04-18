@@ -41,7 +41,7 @@ export default function GlobalTerminal() {
   const { publicLogs, adminLogs, addPublicLog, addAdminLog, clearLogs } = useTerminalStore();
 
   useEffect(() => {
-    const updateWidth = () => setContainerWidth(window.innerWidth - 64);
+    const updateWidth = () => setContainerWidth(window.innerWidth - 240);
     updateWidth();
     window.addEventListener("resize", updateWidth);
     
@@ -147,7 +147,7 @@ export default function GlobalTerminal() {
     <div 
       style={{ height: isCollapsed ? 32 : height }}
       className={cn(
-        "fixed bottom-[32px] left-[64px] right-0 z-30 transition-[height] duration-200 ease-in-out border-t border-border bg-background text-foreground shadow-[0_-8px_40px_rgba(0,0,0,0.4)] select-none overflow-hidden",
+        "fixed bottom-[32px] left-[240px] right-0 z-30 transition-[height] duration-200 ease-in-out border-t border-border bg-background text-foreground select-none overflow-hidden",
         isCollapsed ? "cursor-pointer hover:bg-accent" : "cursor-default",
         isVerticalResizing && "transition-none"
       )}

@@ -14,13 +14,13 @@ export default function DashboardLayout({
       <GlobalNavigation />
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col pl-[64px]">
+      <div className="flex flex-1 flex-col pl-[240px]">
         {/* Top Header */}
         <GlobalHeader />
 
         {/* Content Body (Template handles the Auth Guard for these children) */}
-        <main className="flex-1 pb-[32px]">
-          <div className="mx-auto max-w-[1600px] p-8">
+        <main className="flex-1 ">
+          <div className="mx-auto max-w-full h-full px-4">
             {children}
           </div>
         </main>
