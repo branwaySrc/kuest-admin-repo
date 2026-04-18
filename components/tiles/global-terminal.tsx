@@ -4,7 +4,7 @@ import { useResizable } from "@/hooks/use-resizable";
 import { ChevronUp, ChevronDown, Monitor, Check, AlertTriangle, XCircle, Server,Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState,useEffect } from "react";
-import { useTerminalStore, SystemLog } from "@/hooks/zustand/use-terminal-store";
+import { useTerminalStore, SystemLog } from "@/lib/store/use-terminal-store";
 
 /**
  * [LOGGING SYSTEM GUIDELINE FOR AI AGENTS/DEVELOPERS]

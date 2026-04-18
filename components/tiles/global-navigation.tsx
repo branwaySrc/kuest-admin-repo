@@ -15,7 +15,6 @@ const navItems = [
 
 ];
 
-//Change Bottom Item
 const bottomNavItems = [
   { icon: Code, label: "API", href: "/api-docs" },
   { icon: Settings, label: "Settings", href: "/settings" },

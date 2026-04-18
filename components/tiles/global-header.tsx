@@ -1,10 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Smartphone } from "lucide-react";
+import { useAppViewerStore } from "@/lib/store/use-app-viewer-store";
+import { cn } from "@/lib/utils";
 
 export default function GlobalHeader() {
   const pathname = usePathname();
+  const { isOpen, toggle } = useAppViewerStore();
   
   // Map path to display name
   const getPageTitle = (path: string) => {
@@ -16,7 +19,7 @@ export default function GlobalHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-40 flex h-[64px] w-full items-center border-b border-border bg-background/80 px-6 backdrop-blur-md">
+    <header className="sticky top-0 z-50 flex h-[48px] w-full items-center border-b border-border bg-background/80 px-6 backdrop-blur-md">
       <div className="flex items-center gap-2 text-sm font-medium">
         <span className="text-muted-foreground">Kuest</span>
         <ChevronRight size={14} className="text-muted-foreground/50" />
@@ -24,7 +27,16 @@ export default function GlobalHeader() {
       </div>
 
       <div className="ml-auto flex items-center gap-4">
-        {/* Placeholder for header actions if needed */}
+        <button
+          onClick={toggle}
+          className={cn(
+            "flex h-9 w-9 items-center justify-center rounded-md transition-colors hover:bg-accent hover:text-accent-foreground",
+            isOpen && "bg-accent text-accent-foreground"
+          )}
+          title="App Viewer"
+        >
+          <Smartphone size={20} />
+        </button>
       </div>
     </header>
   );

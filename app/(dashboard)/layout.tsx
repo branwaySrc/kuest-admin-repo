@@ -2,6 +2,7 @@ import GlobalNavigation from "@/components/tiles/global-navigation";
 import GlobalHeader from "@/components/tiles/global-header";
 import GlobalFooter from "@/components/tiles/global-footer";
 import GlobalTerminal from "@/components/tiles/global-terminal";
+import AppViwer from "@/components/tiles/app-viwer";
 
 export default function DashboardLayout({
   children,
@@ -30,6 +31,9 @@ export default function DashboardLayout({
 
         {/* Bottom Status Bar */}
         <GlobalFooter />
+
+        {/* App Viwer */}
+        <AppViwer />
       </div>
     </div>
   );

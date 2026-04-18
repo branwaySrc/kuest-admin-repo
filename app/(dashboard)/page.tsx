@@ -6,9 +6,14 @@ export default function DashboardPage() {
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Overview Stats */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4 pt-4">
         <StatCard title="Total Lines" value={Object.keys(stationLineUniqueCodeBook).length.toString()} />
         <StatCard title="Active Stations" value="240" />
+        <StatCard title="Server Load" value="12%" />
+        <StatCard title="Server Load" value="12%" />
+        <StatCard title="Server Load" value="12%" />
+        <StatCard title="Server Load" value="12%" />
+        <StatCard title="Server Load" value="12%" />
         <StatCard title="Server Load" value="12%" />
       </div>
 
@@ -34,7 +39,7 @@ export default function DashboardPage() {
 
 function StatCard({ title, value }: { title: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card/40 p-6 transition-all hover:bg-card/60 hover:shadow-lg hover:shadow-primary/5 group">
+    <div className="rounded-lg border border-border bg-card/40 p-6 transition-all hover:bg-card/60 hover:shadow-lg hover:shadow-primary/5 group">
       <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground/70 group-hover:text-primary transition-colors">{title}</div>
       <div className="mt-2 text-4xl font-extrabold text-foreground tracking-tight">{value}</div>
       <div className="mt-4 flex items-center gap-1 text-[10px] font-medium text-emerald-500">

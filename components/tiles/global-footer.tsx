@@ -6,42 +6,10 @@ import {
   TrendingUp, TrendingDown, Minus, HardDrive, Clock
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTerminalStore } from "@/hooks/zustand/use-terminal-store";
+import { useTerminalStore } from "@/lib/store/use-terminal-store";
 import { HealthStatus, UsageData, HealthResponse } from "@/app/api/systemlogs/shared";
+import { formatDataSize, formatRelativeTime, formatKSTDate } from "@/lib/formaters";
 
-// ─── 순수 유틸리티 함수 (컴포넌트 외부) ────────────────────
-// 컴포넌트 상태에 의존하지 않으므로 모듈 스코프에 배치합니다.
-
-const KST_OFFSET = 9 * 60 * 60 * 1000;
-
-const formatSize = (bytes: number) => {
-  if (!bytes || bytes === 0) return "0 B";
-  const k = 1024;
-  const sizes = ["B", "KB", "MB", "GB", "TB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-};
-
-/** UTC → KST 기준 상대 시간 */
-const formatRelativeTime = (isoString: string | null) => {
-  if (!isoString) return "-";
-  const diff = Date.now() - new Date(isoString).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return "방금";
-  if (mins < 60) return `${mins}분 전`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}시간 전`;
-  return `${Math.floor(hours / 24)}일 전`;
-};
-
-/** UTC ISO → KST 날짜 문자열 (MM/DD) */
-const formatKSTDate = (isoString: string | null) => {
-  if (!isoString) return null;
-  const kst = new Date(new Date(isoString).getTime() + KST_OFFSET);
-  const month = String(kst.getUTCMonth() + 1).padStart(2, "0");
-  const day = String(kst.getUTCDate()).padStart(2, "0");
-  return `${month}/${day}`;
-};
 
 export default function GlobalFooter() {
   const { addAdminLog } = useTerminalStore();
@@ -147,7 +115,7 @@ export default function GlobalFooter() {
         <div className="flex items-center gap-1.5">
           <HardDrive size={11} className="text-muted-foreground/70" />
           <span className={cn("font-bold", usage.current > 0 ? "text-foreground/90" : "text-muted-foreground")}>
-            {usage.current > 0 ? formatSize(usage.current) : "—"}
+            {usage.current > 0 ? formatDataSize(usage.current) : "—"}
           </span>
         </div>
 
@@ -157,7 +125,7 @@ export default function GlobalFooter() {
             <DiffIcon size={9} />
             {usage.diff !== 0 ? (
               <span>
-                {usage.diff > 0 ? "+" : ""}{formatSize(Math.abs(usage.diff))}
+                {usage.diff > 0 ? "+" : ""}{formatDataSize(Math.abs(usage.diff))}
                 ({usage.rate > 0 ? "+" : ""}{usage.rate.toFixed(2)}%)
               </span>
             ) : (
