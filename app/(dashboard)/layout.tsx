@@ -1,16 +1,13 @@
-import GlobalNavigation from "@/components/tiles/global-navigation";
-import GlobalHeader from "@/components/tiles/global-header";
-import GlobalFooter from "@/components/tiles/global-footer";
-import GlobalTerminal from "@/components/tiles/global-terminal";
-import AppViwer from "@/components/tiles/app-viwer";
+import GlobalNavigation from '@/components/tiles/global-navigation'
+import GlobalHeader from '@/components/tiles/global-header'
+import ServerStatusBar from '@/client/server-status-bar'
+import AppViwer from '@/components/tiles/app-viwer'
+import SystemConsole from '@/client/system-console'
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
+    <div className="bg-background text-foreground flex min-h-screen">
       {/* Sidebar Navigation */}
       <GlobalNavigation />
 
@@ -20,21 +17,19 @@ export default function DashboardLayout({
         <GlobalHeader />
 
         {/* Content Body (Template handles the Auth Guard for these children) */}
-        <main className="flex-1 ">
-          <div className="mx-auto max-w-full h-full px-4">
-            {children}
-          </div>
+        <main className="flex-1">
+          <div className="mx-auto h-full max-w-full px-4">{children}</div>
         </main>
 
         {/* Global PowerShell Terminal */}
-        <GlobalTerminal />
+        <SystemConsole />
 
         {/* Bottom Status Bar */}
-        <GlobalFooter />
-
+        <ServerStatusBar />
+    
         {/* App Viwer */}
         <AppViwer />
       </div>
     </div>
-  );
+  )
 }

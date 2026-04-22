@@ -1,9 +1,9 @@
 export default function OverviewAppListedViewer() {
-    return (
-        <div className="border border-white">
-            <h1>OverviewAppListedViewer</h1>
-        </div>
-    );
+  return (
+    <div className="border border-white">
+      <h1>OverviewAppListedViewer</h1>
+    </div>
+  )
 }
 
 // export default funcion에는 condition을 넣는곳이고

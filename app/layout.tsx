@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import './globals.css'
-import { cn } from '@/lib/utils'
+import { cn } from '@/client/lib/utils'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -25,7 +25,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-
   return (
     <html
       lang="en"
