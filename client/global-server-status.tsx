@@ -4,7 +4,7 @@ import { ServerHealth } from '@/client/features/server-health'
 import { ServerStorage } from '@/client/features/server-storage'
 import { useServerHealthStore } from '@/client/department-feature/store/use-server-health-store'
 
-export default function ServerStatusBar() {
+export default function GlobalServerStatus() {
   const fetchStatus = useServerHealthStore((state) => state.fetchStatus)
 
   useEffect(() => {

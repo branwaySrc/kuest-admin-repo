@@ -15,6 +15,11 @@ export default function GlobalHeader() {
     if (path.startsWith('/database')) return 'Database Management'
     if (path.startsWith('/logs')) return 'System Logs'
     if (path.startsWith('/api-docs')) return 'API Documentation'
+    if (path.startsWith('/advertisement')) return 'Advertisement Management'
+    if (path.startsWith('/statics')) return 'Statics Management'
+    if (path.startsWith('/settings')) return 'Settings'
+    if (path.startsWith('/profile')) return 'Profile'
+    
     return path
       .split('/')
       .filter(Boolean)

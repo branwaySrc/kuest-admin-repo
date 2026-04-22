@@ -8,7 +8,7 @@ import { RotateCcw, Wifi, Battery, Signal, Terminal, Activity } from 'lucide-rea
 
 const emptySubscribe = () => () => {}
 
-export default function AppViwer() {
+export default function GlobalAppViewer() {
   const { isOpen, setIsOpen } = useAppViewerStore()
   const [currentUrl] = useState('https://shop.wisely.store/')
   const [refreshKey, setRefreshKey] = useState(0)

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname,useRouter } from 'next/navigation'
 import {
   LayoutDashboard,
   Database,
@@ -15,7 +15,7 @@ import {
   Link2,
   Server,
 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/' },
@@ -33,12 +33,10 @@ const bottomNavItems = [
 
 export default function GlobalNavigation() {
   const router = useRouter()
-
   const pathname = usePathname()
   const [copied, setCopied] = useState(false)
 
   const handleCopyUrl = () => {
-    // 여기에 기입할 URL을 지정하시면 됩니다.
     navigator.clipboard.writeText('https://kuest-admin-repo.vercel.app/')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)

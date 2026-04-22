@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import { ChevronUp, ChevronDown, Monitor, Database } from 'lucide-react'
 import { cn } from '@/client/lib/utils'
 import { useResizable } from '@/client/lib/use-resizable'
-import { ConsoleSystemEvent} from '@/client/features/console-system-event'
+import { ConsoleSystemEvent } from '@/client/features/console-system-event'
 import { useSystemInitialLogs } from '@/client/department-feature/use-system-initial-log'
 
-export default function SystemConsole() {
+export default function GlobalSystemConsole() {
   // 전체 너비 추적 (퍼센트 계산용)
   const [containerWidth, setContainerWidth] = useState(1000)
 
@@ -61,7 +61,6 @@ export default function SystemConsole() {
       onClick={() => isCollapsed && toggleExpand()}
     >
 
-
       {/* 바닥 드래그 핸들 (상하 조절) */}
       {!isCollapsed && (
         <div
@@ -70,27 +69,21 @@ export default function SystemConsole() {
         />
       )}
 
-
       {/* 터미널 헤더 */}
       <UI.Header
-      
         title='System Console'
         onClick={(e) => {
-              e.stopPropagation()
-              toggleExpand()
-            }}
-
-
+          e.stopPropagation()
+          toggleExpand()
+        }}
       >
-   {isCollapsed ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-
+        {isCollapsed ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </UI.Header>
-     
 
       {/* 피드 패널 (좌우 분할) */}
       {!isCollapsed && (
         <div className="relative flex h-[calc(100%-32px)] w-full">
-          
+
           <UI.Panel
             splitPos={splitPos}
             header="PUBLIC SCHEMA EVENT FEED"
@@ -113,7 +106,7 @@ export default function SystemConsole() {
           >
             <ConsoleSystemEvent.Admin />
           </UI.Panel>
-          
+
         </div>
       )}
     </div>
@@ -121,34 +114,33 @@ export default function SystemConsole() {
 }
 
 const UI = {
-Header: ConsoleHeaderUI,
-  Panel:ConsolePanelUI
+  Header: ConsoleHeaderUI,
+  Panel: ConsolePanelUI
 }
 
 interface ConsoleHeaderUI {
-  title:string;
-  onClick : React.MouseEventHandler<HTMLButtonElement>;
-  children:React.ReactNode;
+  title: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  children: React.ReactNode;
 }
 
-function ConsoleHeaderUI (props:ConsoleHeaderUI) {
+function ConsoleHeaderUI(props: ConsoleHeaderUI) {
 
-  return(
-      <div className="bg-muted/40 border-border flex h-8 shrink-0 items-center justify-between border-b px-4">
-        <div className="flex items-center gap-2.5">
-          <span className="font-mono text-[10px] font-bold tracking-widest uppercase opacity-80">
-            {props.title}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={props.onClick}
-            className="hover:bg-accent rounded-md p-1.5 transition-all active:scale-90"
-          >
-            {props.children}
-          </button>
-        </div>
+  return (
+    <div className="bg-muted/40 border-border flex h-8 shrink-0 items-center justify-between border-b px-4">
+      <div className="flex items-center gap-2.5">
+        <span className="font-mono text-[10px] font-bold tracking-widest uppercase opacity-80">
+          {props.title}
+        </span>
       </div>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={props.onClick}
+          className="hover:bg-accent rounded-md p-1.5 transition-all active:scale-90">
+          {props.children}
+        </button>
+      </div>
+    </div>
 
   )
 
@@ -156,28 +148,28 @@ function ConsoleHeaderUI (props:ConsoleHeaderUI) {
 
 interface ConsolePanelProps {
   splitPos: number
-  header:string
-  route:string
+  header: string
+  route: string
   children: React.ReactNode
 }
 
-function ConsolePanelUI (props:ConsolePanelProps) {
+function ConsolePanelUI(props: ConsolePanelProps) {
   return (
     <div
-            style={{ width: `${100 - props.splitPos}%` }}
-            className="border-border scrollbar-thin scrollbar-thumb-border h-full overflow-y-auto border-r bg-black/20 p-4 font-mono text-[11px]"
-          >
-            <div className="text-foreground/60 border-border/40 mb-1 flex items-center gap-2 border-b pb-1.5">
-              <Monitor size={12} />
-              <span className="tracking-tight">{props.header}</span>
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <p className="text-primary/60 mb-2 flex items-center gap-2">
-                <Database size={13} className="shrink-0" />
-               {props.route}
-              </p>
-              {props.children}
-            </div>
-          </div>
+      style={{ width: `${100 - props.splitPos}%` }}
+      className="border-border scrollbar-thin scrollbar-thumb-border h-full overflow-y-auto border-r bg-black/20 p-4 font-mono text-[11px]"
+    >
+      <div className="text-foreground/60 border-border/40 mb-1 flex items-center gap-2 border-b pb-1.5">
+        <Monitor size={12} />
+        <span className="tracking-tight">{props.header}</span>
+      </div>
+      <div className="flex flex-col space-y-1.5">
+        <p className="text-primary/60 mb-2 flex items-center gap-2">
+          <Database size={13} className="shrink-0" />
+          {props.route}
+        </p>
+        {props.children}
+      </div>
+    </div>
   )
 }

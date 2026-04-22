@@ -1,8 +1,8 @@
-import GlobalNavigation from '@/components/tiles/global-navigation'
-import GlobalHeader from '@/components/tiles/global-header'
-import ServerStatusBar from '@/client/server-status-bar'
-import AppViwer from '@/components/tiles/app-viwer'
-import SystemConsole from '@/client/system-console'
+import GlobalNavigation from '@/client/global-navigation'
+import GlobalHeader from '@/client/global-header'
+import GlobalServerStatus from '@/client/global-server-status'
+import GlobalAppViewer from '@/client/global-app-viewer'
+import GlobalSystemConsole from '@/client/global-system-console'
 
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -22,13 +22,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </main>
 
         {/* Global PowerShell Terminal */}
-        <SystemConsole />
+        <GlobalSystemConsole />
 
         {/* Bottom Status Bar */}
-        <ServerStatusBar />
+        <GlobalServerStatus />
     
         {/* App Viwer */}
-        <AppViwer />
+        <GlobalAppViewer />
       </div>
     </div>
   )
