@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useConsoleSystemStore } from "./store/use-console-system-store"
+import { fetchSystemLogs } from "./api/fetch-system-logs"
 
 export function useSystemInitialLogs() {
   const { clearLogs, addPublicLog, addAdminLog } = useConsoleSystemStore()
@@ -12,8 +13,7 @@ export function useSystemInitialLogs() {
 
     const checkSystemHealth = async () => {
       try {
-        const res = await fetch('/api/systemlogs')
-        const data = await res.json()
+        const data = await fetchSystemLogs();
 
         if (!mounted) return
 

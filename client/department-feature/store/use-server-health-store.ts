@@ -4,6 +4,7 @@ import { create } from 'zustand'
 import { HealthStatus, UsageData, HealthResponse } from '@/app/api/systemlogs/shared'
 import { useConsoleSystemStore } from '@/client/department-feature/store/use-console-system-store'
 import { formattedKSTDateTime } from '@/client/lib/formaters'
+import { fetchSystemLogs } from '@/client/department-feature/api/fetch-system-logs'
 
 interface ServerHealthStore {
   lastChecked: string
@@ -44,13 +45,7 @@ export const useServerHealthStore = create<ServerHealthStore>((set, get) => ({
     set({ status: 'checking' })
 
     try {
-      const res = await fetch('/api/systemlogs')
-      const data = await res.json()
-
-      if (!res.ok) {
-        set({ status: 'error' })
-        return
-      }
+      const data = await fetchSystemLogs();
 
       get().applyResponse(data)
       set({status:"online"})
@@ -72,15 +67,8 @@ export const useServerHealthStore = create<ServerHealthStore>((set, get) => ({
     addAdminLog('INFO', 'Action[INSERT]: Requesting Supabase update...')
 
     try {
-      const res = await fetch('/api/systemlogs', { method: 'POST' })
+     const data = await fetchSystemLogs('POST');
 
-      if (!res.ok) {
-        set({ status: 'error' })
-        addAdminLog('FAILED', 'Action[INSERT]: API responded with FAILED status.')
-        return
-      }
-
-      const data = await res.json()
       get().applyResponse(data)
 
       // 3. 비즈니스 로직 분기 (성공 내 디테일)

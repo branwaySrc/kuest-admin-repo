@@ -54,7 +54,7 @@ export default function GlobalNavigation() {
         <div className="bg-primary text-primary-foreground shadow-primary/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-lg">
           <span className="text-md font-bold">K</span>
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col">
           <span className="text-sm font-bold tracking-tight">Kuest Admin</span>
           <span className="text-muted-foreground text-xs font-medium tracking-tight">@kuest</span>
         </div>
