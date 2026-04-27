@@ -54,7 +54,7 @@ export default function GlobalSystemConsole() {
     <div
       style={{ height: isCollapsed ? 32 : height }}
       className={cn(
-        'border-border bg-background text-foreground fixed right-0 bottom-[32px] left-[240px] z-30 overflow-hidden border-t transition-[height] duration-200 ease-in-out select-none',
+        'border-border bg-background text-foreground relative z-30 w-full shrink-0 overflow-hidden border-t transition-[height] duration-200 ease-in-out select-none',
         isCollapsed ? 'hover:bg-accent cursor-pointer' : 'cursor-default',
         isVerticalResizing && 'transition-none',
       )}

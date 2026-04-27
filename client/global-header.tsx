@@ -28,7 +28,7 @@ export default function GlobalHeader() {
   }
 
   return (
-    <header className="border-border bg-background/80 sticky top-0 z-50 flex h-[48px] w-full items-center border-b px-6 backdrop-blur-md">
+    <header className="border-border bg-background/80 sticky top-0 z-50 flex h-[48px] w-full items-center border-b px-4 backdrop-blur-md">
       <div className="flex items-center gap-2 text-sm font-medium">
         <span className="text-muted-foreground">Kuest</span>
         <ChevronRight size={14} className="text-muted-foreground/50" />

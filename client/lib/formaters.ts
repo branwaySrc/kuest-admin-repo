@@ -30,10 +30,11 @@ export const formatKSTDate = (isoString: string | null) => {
   if (!isoString) return null
 
   const kst = new Date(new Date(isoString).getTime() + KST_OFFSET)
+  const year = kst.getFullYear().toString().slice(-2) // 2-digit
   const month = String(kst.getUTCMonth() + 1).padStart(2, '0')
   const day = String(kst.getUTCDate()).padStart(2, '0')
 
-  return `${month}/${day}`
+  return `${year}/${month}/${day}`
 }
 
 export const formattedKSTDateTime = () =>

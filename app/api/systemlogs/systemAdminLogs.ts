@@ -1,7 +1,8 @@
 'use server'
 
 import { supabaseAdmin } from '@/client/lib/supabase'
-import { __schema, SIX_HOURS_MS, AccountAccessStatus } from './shared'
+import { __SERVER_HEALTH_CHECK_TABLE, __SIX_HOURS_MS } from '@/shared'
+import { AccountAccessStatus } from '@/shared/types/server-health.schema'
 
 /**
  * [systemLogs.ts]
@@ -21,7 +22,7 @@ function getHourBucket(): string {
 
 /** 현재 DB 물리 용량을 Supabase View에서 조회합니다. */
 async function fetchCurrentDbSize(): Promise<number> {
-  const { data, error } = await supabaseAdmin.from(__schema.public.dbSizeView).select('*').single()
+  const { data, error } = await supabaseAdmin.from(__SERVER_HEALTH_CHECK_TABLE.public.dbSizeView).select('*').single()
 
   if (error) {
     console.error('[systemLogs > fetchCurrentDbSize] DB 용량 조회 실패:', error)
@@ -33,8 +34,8 @@ async function fetchCurrentDbSize(): Promise<number> {
 /** 가장 최근의 usage_log row를 가져옵니다. */
 async function getLatestUsageLog() {
   const { data, error } = await supabaseAdmin
-    .schema(__schema.admin.schema)
-    .from(__schema.admin.usageLog)
+    .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+    .from(__SERVER_HEALTH_CHECK_TABLE.admin.usageLog)
     .select('*')
     .order('created_at', { ascending: false })
     .limit(1)
@@ -58,13 +59,13 @@ export async function smartUpsertUsage(): Promise<number> {
 
   if (latestLog) {
     const elapsed = now.getTime() - new Date(latestLog.created_at).getTime()
-    const isExpired = elapsed >= SIX_HOURS_MS
+    const isExpired = elapsed >= __SIX_HOURS_MS
 
     if (isExpired) {
       console.log(`[systemLogs > smartUpsertUsage] 6시간 경과 → UPSERT`)
       const { error } = await supabaseAdmin
-        .schema(__schema.admin.schema)
-        .from(__schema.admin.usageLog)
+        .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+        .from(__SERVER_HEALTH_CHECK_TABLE.admin.usageLog)
         .upsert(
           { hour_bucket: currentHourBucket, db_size: dbSize, updated_at: now.toISOString(), checked_at: now.toISOString() },
           { onConflict: 'hour_bucket' },
@@ -73,8 +74,8 @@ export async function smartUpsertUsage(): Promise<number> {
     } else {
       console.log(`[systemLogs > smartUpsertUsage] 6시간 미만 → UPDATE`)
       const { error } = await supabaseAdmin
-        .schema(__schema.admin.schema)
-        .from(__schema.admin.usageLog)
+        .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+        .from(__SERVER_HEALTH_CHECK_TABLE.admin.usageLog)
         .update({ db_size: dbSize, updated_at: now.toISOString(), checked_at: now.toISOString() })
         .eq('id', latestLog.id)
       if (error) throw error
@@ -82,8 +83,8 @@ export async function smartUpsertUsage(): Promise<number> {
   } else {
     console.log('[systemLogs > smartUpsertUsage] 로그 없음 → 최초 UPSERT')
     const { error } = await supabaseAdmin
-      .schema(__schema.admin.schema)
-      .from(__schema.admin.usageLog)
+      .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+      .from(__SERVER_HEALTH_CHECK_TABLE.admin.usageLog)
       .upsert({ hour_bucket: currentHourBucket, db_size: dbSize, checked_at: now.toISOString() }, { onConflict: 'hour_bucket' })
     if (error) throw error
   }
@@ -96,8 +97,8 @@ export async function smartUpsertUsage(): Promise<number> {
  */
 export async function getUsageStats() {
   const { data, error } = await supabaseAdmin
-    .schema(__schema.admin.schema)
-    .from(__schema.admin.usageLog)
+    .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+    .from(__SERVER_HEALTH_CHECK_TABLE.admin.usageLog)
     .select('id, db_size, created_at, updated_at')
     .order('created_at', { ascending: false })
     .limit(2)
@@ -134,8 +135,8 @@ export async function insertAccountLog(statusString: AccountAccessStatus) {
     }
 
     const { error } = await supabaseAdmin
-      .schema(__schema.admin.schema)
-      .from(__schema.admin.accountLog)
+      .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+      .from(__SERVER_HEALTH_CHECK_TABLE.admin.accountLog)
       .insert([dbPayload])
 
     if (error) {

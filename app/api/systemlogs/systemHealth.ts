@@ -1,5 +1,5 @@
 import { supabase, supabaseAdmin } from '@/client/lib/supabase'
-import { __schema } from './shared'
+import { __SERVER_HEALTH_CHECK_TABLE } from '@/shared'
 
 /**
  * [systemHealth.ts]
@@ -9,7 +9,7 @@ import { __schema } from './shared'
 /** 공용 스키마 연결 확인 (일반 권한) */
 export async function checkPublicSchemaHealth() {
   const { error } = await supabase
-    .from(__schema.public.dummyTable)
+    .from(__SERVER_HEALTH_CHECK_TABLE.public.dummyTable)
     .select('*', { head: true, count: 'exact' })
 
   if (error && error.message.includes('fetch')) {
@@ -22,8 +22,8 @@ export async function checkPublicSchemaHealth() {
 /** 어드민 스키마 연결 확인 (서비스 롤 권한) */
 export async function checkAdminSchemaHealth() {
   const { error } = await supabaseAdmin
-    .schema(__schema.admin.schema)
-    .from(__schema.admin.usageLog)
+    .schema(__SERVER_HEALTH_CHECK_TABLE.admin.schema)
+    .from(__SERVER_HEALTH_CHECK_TABLE.admin.usageLog)
     .select('*', { head: true, count: 'exact' })
 
   if (error && error.message.includes('fetch')) {

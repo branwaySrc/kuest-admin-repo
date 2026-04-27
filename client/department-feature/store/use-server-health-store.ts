@@ -1,7 +1,7 @@
 'use client'
 
 import { create } from 'zustand'
-import { HealthStatus, UsageData, HealthResponse } from '@/app/api/systemlogs/shared'
+import { HealthResponse, HealthStatus, UsageData } from '@/shared/types/server-health.schema'
 import { useConsoleSystemStore } from '@/client/department-feature/store/use-console-system-store'
 import { formattedKSTDateTime } from '@/client/lib/formaters'
 import { fetchSystemLogs } from '@/client/department-feature/api/fetch-system-logs'

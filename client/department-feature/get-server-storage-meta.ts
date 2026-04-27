@@ -1,7 +1,7 @@
 'use client'
 
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react'
-import { UsageData } from '@/app/api/systemlogs/shared'
+import { UsageData } from "@/shared/types/server-health.schema"
 
 export function getServerStorageMeta(usage: UsageData) {
   const DiffIcon = usage.diff > 0 ? TrendingUp : usage.diff < 0 ? TrendingDown : Minus

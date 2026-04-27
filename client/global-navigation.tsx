@@ -14,11 +14,13 @@ import {
   Check,
   Link2,
   Server,
+  Box
 } from 'lucide-react'
 
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/' },
+  { icon: Box, label: 'Contents', href: '/contents' },
   { icon: Database, label: 'Database', href: '/database' },
   { icon: Database, label: 'Advertisement', href: '/advertisement' },
   { icon: Database, label: 'Statics', href: '/statics' },

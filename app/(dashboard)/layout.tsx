@@ -7,7 +7,7 @@ import GlobalSystemConsole from '@/client/global-system-console'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-background text-foreground flex min-h-screen">
+    <div className="bg-background text-foreground flex h-screen overflow-hidden">
       {/* Sidebar Navigation */}
       <GlobalNavigation />
 
@@ -17,8 +17,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <GlobalHeader />
 
         {/* Content Body (Template handles the Auth Guard for these children) */}
-        <main className="flex-1">
-          <div className="mx-auto h-full max-w-full px-4">{children}</div>
+        <main className="flex-1 min-h-0 flex flex-col w-full">
+          <div className="h-full max-w-full w-full">{children}</div>
         </main>
 
         {/* Global PowerShell Terminal */}

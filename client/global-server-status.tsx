@@ -12,7 +12,7 @@ export default function GlobalServerStatus() {
   }, [fetchStatus])
 
   return (
-    <footer className="border-border bg-card text-muted-foreground fixed right-0 bottom-0 left-[240px] z-40 flex h-[32px] items-center overflow-hidden border-t px-4 font-mono text-[10px] select-none">
+    <footer className="border-border bg-card text-muted-foreground relative z-40 flex h-[32px] w-full shrink-0 items-center overflow-hidden border-t px-4 font-mono text-[10px] select-none">
       {/* LEFT: Connection Clusters */}
       <div className="flex shrink-0 items-center gap-3">
         <ServerHealth.Admin />

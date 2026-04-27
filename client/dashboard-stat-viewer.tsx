@@ -7,7 +7,7 @@ import { Badge } from "./department-ui/ui/badge";
 
 export default function DashboardStatViewer() {
   return (
-    <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-4 px-4">
       <UI.StatBlock
         title="Rails">
         <StatsResource.Lines />

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import { useConsoleSystemStore } from "./store/use-console-system-store"
-import { fetchSystemLogs } from "./api/fetch-system-logs"
+import { useConsoleSystemStore } from "@/client/department-feature/store/use-console-system-store"
+import { fetchSystemLogs } from "@/client/department-feature/api/fetch-system-logs"
 
 export function useSystemInitialLogs() {
   const { clearLogs, addPublicLog, addAdminLog } = useConsoleSystemStore()
