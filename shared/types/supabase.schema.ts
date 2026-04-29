@@ -1,6 +1,8 @@
 
 export type EnumSubwayLineCategory = 'Metro' | 'Regional' | 'LightRail';
 export type EnumLocationCategory = 'food' | 'spot' | 'shopping' | 'culture';
+
+//supabase Enum Type 등록되어있음.
 export type EnumSubwayLines = 
   | 'line_1' | 'line_2' | 'line_3' | 'line_4' | 'line_5' 
   | 'line_6' | 'line_7' | 'line_8' | 'line_9'

@@ -24,7 +24,7 @@ function FilterControl() {
       <Accordion type="multiple" className="w-full">
         <AccordionItem value="filters" className="border-b-0">
           <AccordionTrigger className="px-4 py-2 hover:no-underline hover:bg-accent/30 transition-colors">
-            <span className="text-xs font-bold text-muted-foreground uppercase tracking-tight">Quick Filters</span>
+            <span className="text-xs text-muted-foreground">Quick Filters</span>
           </AccordionTrigger>
           
           <AccordionContent className="pb-2">
@@ -88,7 +88,7 @@ function FilterCounter() {
 
   return (
     <div className="border-b px-4 py-2 bg-muted/20">
-      <div className="flex items-center justify-between text-[11px] font-medium text-muted-foreground">
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>Selected Lines</span>
         <span className="font-bold text-primary">
           {selectedCount} / {totalCount}

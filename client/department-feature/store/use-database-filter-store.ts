@@ -13,7 +13,7 @@ interface DatabaseFilterState {
   selectedLineIds: string[]
   searchQuery: string
   
-  fetchData: () => Promise<void>
+  fetchData: (force?: boolean) => Promise<void>
   toggleLine: (id: string) => void
   setLines: (ids: string[]) => void
   setSearchQuery: (query: string) => void
@@ -34,10 +34,10 @@ export const useDatabaseFilterStore = create<DatabaseFilterState>((set, get) => 
 
   setSearchQuery: (query) => set({ searchQuery: query }),
 
-  fetchData: async () => {
+  fetchData: async (force = false) => {
     const state = get()
-    // 이미 로딩 중이거나 데이터가 존재하면 중복 호출 방지
-    if (state.isLoading || state.subwayLines.length > 0) return
+    // 이미 로딩 중이거나 (force가 아닐 때) 데이터가 존재하면 중복 호출 방지
+    if (state.isLoading || (!force && state.subwayLines.length > 0)) return
 
     set({ isLoading: true, error: null })
     const { addAdminLog } = useConsoleSystemStore.getState()

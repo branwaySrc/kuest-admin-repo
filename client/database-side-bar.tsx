@@ -8,7 +8,7 @@ export function DatabaseSideBar() {
   const subwayLines = useDatabaseFilterStore((s) => s.subwayLines)
 
   return (
-    <div className="flex h-full w-72 flex-col border-r bg-card/50 backdrop-blur-sm">
+    <div className="flex h-full w-58 flex-col border-r bg-card/50 backdrop-blur-sm">
       <SubwayFilter.ReservedControl />
       <SubwayFilter.Counter />
       <ScrollArea className="flex-1 h-full">
